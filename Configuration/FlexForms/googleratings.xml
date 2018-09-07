@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Flexform Plugins</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.placeid>
+                        <TCEforms>
+                            <label>Google Place ID</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.placeid>
+                    <settings.lang>
+                        <TCEforms>
+                            <label>Language</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.lang>
+                    <settings.shortname>
+                        <TCEforms>
+                            <label>Short people names</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.shortname>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

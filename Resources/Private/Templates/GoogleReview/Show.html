@@ -1,0 +1,33 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+    <div class="card-columns">
+        <f:for each="{output}" as="review">
+            <div class="card">
+                <div class="card-body">
+                    <div class="rating mb-3">
+                        <f:for each="{review.rating}" as="rate1">
+                            <span class="fa fa-star text-primary"></span>
+                        </f:for>
+                        <f:for each="{review.stardiff}" as="rate2">
+                            <span class="fa fa-star"></span>
+                        </f:for>
+                    </div>
+                    <p>{review.text}</p>
+                    <div class="media">
+                        <img src="{review.profile_photo_url}" class="mr-3 googlereviews-usericon" />
+                        <div class="media-body">
+                            <p>{review.author_name}<br />
+                                <span class="text-muted">{review.relative_time_description}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+</f:section>
+</html>

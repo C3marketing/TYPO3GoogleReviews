@@ -1,0 +1,20 @@
+{
+  "name": "steinbauerit/sit-googlereviews",
+  "type": "typo3-cms-extension",
+  "description": "A TYPO3 extension which shows Google ratings. A Google Places API Key and a Place ID are required.",
+  "authors": [
+    {
+      "name": "Patric Eckhart",
+      "email": "patric.eckhart@steinbauer-it.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^7.6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SteinbauerIT\\SitGooglereviews\\": "Classes"
+    }
+  }
+}
