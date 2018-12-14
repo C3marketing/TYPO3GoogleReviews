@@ -8,14 +8,30 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.placename>
+                        <TCEforms>
+                            <label>Placename</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.placename>
                     <settings.placeid>
                         <TCEforms>
-                            <label>Google Place ID</label>
+                            <label>Google Place ID - https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder </label>
                             <config>
                                 <type>input</type>
                             </config>
                         </TCEforms>
                     </settings.placeid>
+                    <settings.readallreviewlink>
+                        <TCEforms>
+                            <label>All Review Link - https://supple.com.au/tools/google-review-link-generator/</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.readallreviewlink>
                     <settings.lang>
                         <TCEforms>
                             <label>Language</label>
@@ -32,6 +48,7 @@
                             </config>
                         </TCEforms>
                     </settings.shortname>
+
                 </el>
             </ROOT>
         </sDEF>

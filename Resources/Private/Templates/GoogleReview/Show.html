@@ -1,33 +1,58 @@
-{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
 
 <f:section name="main">
+    <div class="ratingWrap">
+        <h3 class="reviewHeader">Bewertungen</h3>
+        <b>{settings.placename}</b>
+        <span class="ratingVal">&Oslash; {output.rating} / 5
+            <span class="overallRatingStarWrap">
+                <span class="empty-stars"></span>
+                <span class="full-stars" style="width: {v:math.product(a: output.rating, b: 20)}%;"></span>
+            </span>
+        </span>
+    </div>
     <div class="card-columns">
-        <f:for each="{output}" as="review">
+        <f:for each="{output.review}" as="review">
             <div class="card">
-                <div class="card-body">
+                <div class="starRatingWrap" >
                     <div class="rating mb-3">
                         <f:for each="{review.rating}" as="rate1">
-                            <span class="fa fa-star text-primary"></span>
+                            <span class="fa fa-star text-primary">★</span>
                         </f:for>
                         <f:for each="{review.stardiff}" as="rate2">
-                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star">☆</span>
                         </f:for>
                     </div>
-                    <p>{review.text}</p>
-                    <div class="media">
-                        <img src="{review.profile_photo_url}" class="mr-3 googlereviews-usericon" />
-                        <div class="media-body">
-                            <p>{review.author_name}<br />
-                                <span class="text-muted">{review.relative_time_description}</span>
-                            </p>
-                        </div>
-                    </div>
+                   <span class="date">{review.relative_time_description}</span>
+                </div>
+                <div class="card-body">
+                    <p class="reviewText">{review.text}</p>
+                    <p class="reviewerName">{review.author_name}</p>
                 </div>
             </div>
         </f:for>
+        <div class="card cardAllReviews">
+            <p class="readAllReview">
+                Sie möchten noch mehr Kundenmeinungen lesen? <br />Hier finden Sie weitere Bewertungen zur {settings.placename}:<br /><br />
+                <f:link.external class="link-button" target="_blank" uri="{settings.readallreviewlink}">Alle Bewertungen ansehen</f:link.external>
+            </p>
+
+
+        </div>
+    </div>
+    <div class="writeReview">
+        <b class="reviewNowHeader">Schreiben Sie Ihre eigene Bewertung</b>
+
+        <p class="desc">Wir freuen uns auf Ihre Erfahrungen mit dem Fachpersonal in unserer <b>{settings.placename}</b>.</p>
+
+        <f:link.external class="link-button writeReviewButton" target="_blank" uri="http://search.google.com/local/writereview?placeid={settings.placeid}">
+            Jetzt Bewertung abgeben
+        </f:link.external>
     </div>
 </f:section>
 </html>
