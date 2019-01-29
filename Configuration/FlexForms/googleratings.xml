@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+        <langDatabaseOverlay>1</langDatabaseOverlay>
+    </meta>
     <sheets>
+        <settings>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Plugin Einstellungen</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>Ansicht wählen</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items type="array">
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Places Bewertung anzeigen</numIndex>
+                                        <numIndex index="1">GoogleReview->show</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">Alle Bewertungen aus Cache</numIndex>
+                                        <numIndex index="1">GoogleReview->showAllCaches</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+                </el>
+            </ROOT>
+        </settings>
         <sDEF>
             <ROOT>
                 <TCEforms>
                     <sheetTitle>Flexform Plugins</sheetTitle>
+                    <displayCond>FIELD:settings.switchableControllerActions:=:GoogleReview->show</displayCond>
+
                 </TCEforms>
                 <type>array</type>
                 <el>
@@ -48,7 +83,6 @@
                             </config>
                         </TCEforms>
                     </settings.shortname>
-
                 </el>
             </ROOT>
         </sDEF>

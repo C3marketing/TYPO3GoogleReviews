@@ -9,11 +9,10 @@ call_user_func(
             'SteinbauerIT.SitGooglereviews',
             'Googleratings',
             [
-                'GoogleReview' => 'show'
+                'GoogleReview' => 'show, showAllCaches'
             ],
             // non-cacheable actions
             [
-                'GoogleReview' => 'show'
             ]
         );
 

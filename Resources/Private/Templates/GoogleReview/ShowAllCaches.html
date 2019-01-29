@@ -1,0 +1,94 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+    <div class="reviewHeaderWrap">
+        <div class="selectStores listView">
+            <h3>Hier können Sie die Bewertungen Ihrer Filiale finden:</h3>
+            <select class="placelist" name="placelist">
+                <option value="">Alle anzeigen</option>
+                <f:for each="{reviews.places}" as="place" key="placeKey">
+                    <option value="{placeKey}">{place.title}</option>
+                </f:for>
+            </select>
+        </div>
+
+        <div class="ratingWrap ratingAvg" >
+            <h3 class="reviewHeader">Bewertungen</h3>
+            <b>Reifen Stiebling - Alle Filialen</b>
+            <span class="ratingVal">&Oslash; {avg.overallAvg} / 5
+                <span class="overallRatingStarWrap">
+                    <span class="empty-stars"></span>
+                    <span class="full-stars" style="width: {v:math.product(a: avg.overallAvg, b: 20)}%;"></span>
+                </span>
+            </span>
+        </div>
+        <f:for each="{reviews.places}" as="place" key="placeKey">
+            <div class="ratingWrap hidden" data-placeid="{placeKey}">
+                <h3 class="reviewHeader">Bewertungen</h3>
+                <b>{place.title}</b>
+                <span class="ratingVal">&Oslash; {place.rating} / 5
+                    <span class="overallRatingStarWrap">
+                        <span class="empty-stars"></span>
+                        <span class="full-stars" style="width: {v:math.product(a: place.rating, b: 20)}%;"></span>
+                    </span>
+                </span>
+            </div>
+        </f:for>
+    </div>
+    <div class="card-columns">
+        <f:for each="{reviews.review}" as="review">
+            <div class="card" data-placeid="{review.place}">
+                <div class="starRatingWrap" >
+                    <div class="rating mb-3">
+                        <f:for each="{review.rating}" as="rate1">
+                            <span class="fa fa-star text-primary">★</span>
+                        </f:for>
+                        <f:for each="{review.stardiff}" as="rate2">
+                            <span class="fa fa-star">☆</span>
+                        </f:for>
+                    </div>
+                    <span class="date">{review.relative_time_description}</span>
+                </div>
+                <div class="card-body">
+                    <p class="reviewText">{review.text}</p>
+                    <p class="reviewerName">{review.author_name}</p>
+                </div>
+            </div>
+        </f:for>
+        <div class="card cardAllReviews DummyAllRevies">
+            <p class="readAllReview">
+                Sie möchten noch mehr Kundenmeinungen lesen? <br />Bitte wählen Sie vorher Ihre Filliale aus<br /><br />
+            </p>
+        </div>
+        <f:for each="{reviews.places}" as="place" key="placeKey">
+            <div class="card cardAllReviews hidden" data-placeid="{placeKey}" >
+                <p class="readAllReview">
+                    Sie möchten noch mehr Kundenmeinungen lesen? <br />Hier finden Sie weitere Bewertungen zur {place.title}:<br /><br />
+                    <f:link.external class="link-button" target="_blank" uri="{settings.readallreviewlink}">Alle Bewertungen ansehen</f:link.external>
+                </p>
+            </div>
+        </f:for>
+    </div>
+    <div class="writeReview DummyWriteReview">
+        <b class="reviewNowHeader">Bitte wählen Sie Ihre Filiale aus, um uns Ihre eigene Bewertung zu hinterlassen.</b>
+        <p class="desc">Wir freuen uns auf Ihre Erfahrungen.</p>
+    </div>
+
+    <f:for each="{reviews.places}" as="place" key="placeKey">
+        <div class="writeReview hidden" data-placeid="{placeKey}">
+            <b class="reviewNowHeader">Schreiben Sie Ihre eigene Bewertung</b>
+
+            <p class="desc">Wir freuen uns auf Ihre Erfahrungen mit dem Fachpersonal in unserer <b>{place.title}</b>.</p>
+
+            <f:link.external class="link-button writeReviewButton" target="_blank" uri="http://search.google.com/local/writereview?placeid={placeKey}">
+                Jetzt Bewertung abgeben
+            </f:link.external>
+        </div>
+    </f:for>
+</f:section>
+</html>

@@ -12,16 +12,42 @@ class GoogleReviewRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $apiKey
      * @param string $lang
      * @param string $shortname
+     * @param string $placename
      * @return array
      */
-    public function showReviews($placeId,$apiKey,$lang,$shortname) {
+    public function showReviews($placeId,$apiKey,$lang,$shortname, $placename) {
+        $xml = null;
+
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+        $cacheRepository = $objectManager->get('SteinbauerIT\SitGooglereviews\Domain\Repository\ReviewcacheRepository');
+        $reviewCache = $cacheRepository->findByPlaceId($placeId)->getFirst();
+
+        if($reviewCache && $reviewCache->getLasthit() > (time() + 12*60*60) ) {
+            $xml = simplexml_load_string($reviewCache->getResponse());
+        } else {
+            $xmlfile = 'https://maps.googleapis.com/maps/api/place/details/xml?placeid='.$placeId.'&fields=rating,reviews,url&key='.$apiKey.'&language='.$lang;
+            $xml = simplexml_load_file($xmlfile);
+            if($reviewCache == null) {
+                $reviewCache = new \SteinbauerIT\SitGooglereviews\Domain\Model\Reviewcache;
+                $reviewCache->setTitle($placename);
+                $reviewCache->setPlaceId($placeId);
+                $cacheRepository->add($reviewCache);
+                $objectManager->get('TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface')->persistAll();
+            }
+        }
+
        // $xmlfile = 'https://maps.googleapis.com/maps/api/place/details/xml?placeid='.$placeId.'&fields=reviews&key='.$apiKey.'&language='.$lang;
-        $xmlfile = 'https://maps.googleapis.com/maps/api/place/details/xml?placeid='.$placeId.'&fields=rating,reviews,url&key='.$apiKey.'&language='.$lang;
-        $xml = simplexml_load_file($xmlfile);
         $check = $xml->status[0];
         if ($check=='INVALID_REQUEST') {
             $output = "Error! Place ID or API Key not correct.";
         } else {
+            // update Cache
+
+            $reviewCache->setResponse( $xml->asXML() );
+            $reviewCache->setLasthit(time());
+            $cacheRepository->update($reviewCache);
+            $objectManager->get('TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface')->persistAll();
+
             $reviews = $xml->result[0]->review;
             $output = array();
             $output['rating'] = (string) $xml->result[0]->rating;
@@ -59,5 +85,7 @@ class GoogleReviewRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
         return $output;
     }
+
+
 
 }

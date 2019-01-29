@@ -9,6 +9,23 @@
             <trans-unit id="tx_sit_googlereviews_domain_model_googleratings.description">
                 <source>Google Reviews</source>
             </trans-unit>
+            <trans-unit id="tx_sitgooglereviews_domain_model_reviewcache.reviewcache">
+                <source>Google Reviews Cache</source>
+            </trans-unit>
+            <trans-unit id="tx_sitgooglereviews_domain_model_reviewcache.title">
+                <source>Google Reviews Cache Entry</source>
+            </trans-unit>
+            <trans-unit id="tx_sitgooglereviews_domain_model_reviewcache.place_id">
+                <source>Place ID for Cache</source>
+            </trans-unit>
+            <trans-unit id="tx_sitgooglereviews_domain_model_reviewcache.response">
+                <source>Cached Response</source>
+            </trans-unit>
+            <trans-unit id="tx_sitgooglereviews_domain_model_reviewcache.lasthit">
+                <source>Last Cache Update</source>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

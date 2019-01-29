@@ -24,3 +24,4 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
     'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/googleratings.xml');
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'recursive,select_key,pages';
+
